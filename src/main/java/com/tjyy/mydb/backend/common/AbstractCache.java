@@ -31,7 +31,7 @@ public abstract class AbstractCache<T>{
     }
 
     /**
-     * 获取数据库资源
+     * 获取数据库资源 key为页面数
      * @param key
      * @return
      * @throws Exception
@@ -143,7 +143,7 @@ public abstract class AbstractCache<T>{
 
     /**
      * 当资源被驱逐时候的写回策略
-     * @param onj
+     * @param obj
      */
-    protected abstract void releaseForCache(T onj);
+    protected abstract void releaseForCache(T obj);
 }
