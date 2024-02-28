@@ -4,7 +4,7 @@ import com.tjyy.mydb.backend.common.AbstractCache;
 import com.tjyy.mydb.backend.dm.page.Page;
 import com.tjyy.mydb.backend.dm.page.PageImpl;
 import com.tjyy.mydb.common.Error;
-import com.tjyy.mydb.util.Panic;
+import com.tjyy.mydb.backend.util.Panic;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;

@@ -2,7 +2,7 @@ package com.tjyy.mydb.backend.dm.pageCache;
 
 import com.tjyy.mydb.backend.dm.page.Page;
 import com.tjyy.mydb.common.Error;
-import com.tjyy.mydb.util.Panic;
+import com.tjyy.mydb.backend.util.Panic;
 
 import java.io.File;
 import java.io.FileNotFoundException;
