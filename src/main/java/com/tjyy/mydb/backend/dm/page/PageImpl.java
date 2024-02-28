@@ -19,7 +19,9 @@ public class PageImpl implements Page{
 
     public PageImpl(int pageNumber, byte[] data, PageCache pageCache) {
         this.pageNumber = pageNumber;
-        this.data = data;
+        this.data = new byte[PageCache.PAGE_SIZE];
+        System.arraycopy(data, 0, this.data, 0, data.length);
+
         this.pageCache = pageCache;
         lock = new ReentrantLock();
         dirty = false;

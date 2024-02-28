@@ -106,7 +106,7 @@ public interface PageCache {
     void release(Page page);
 
     /**
-     * 当前缓存中页面数量
+     * 当前数据库中页面数量
      * @return
      */
     int getPageNumber();
