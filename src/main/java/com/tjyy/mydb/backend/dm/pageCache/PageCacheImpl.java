@@ -138,6 +138,20 @@ public class PageCacheImpl extends AbstractCache<Page> implements PageCache {
         super.release((long) page.getPageNumber());
     }
 
+    /**
+     * 设置 DB 文件中的最大页数
+     * @param maxPgno
+     */
+    @Override
+    public void truncateByPgno(int maxPgno) {
+        long size = pageOffset(maxPgno);
+        try{
+            randomAccessFile.setLength(size);
+        }catch (IOException e){
+            Panic.panic(e);
+        }
+        pageNumbers.set(maxPgno);
+    }
 
     /**
      * 获取数据库中页的长度

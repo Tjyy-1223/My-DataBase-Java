@@ -106,6 +106,12 @@ public interface PageCache {
     void release(Page page);
 
     /**
+     * 设置 DB 文件中的最大页数
+     * @param maxPgno
+     */
+    void truncateByPgno(int maxPgno);
+
+    /**
      * 当前数据库中页面数量
      * @return
      */
