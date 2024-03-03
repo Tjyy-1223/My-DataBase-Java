@@ -2,6 +2,7 @@ package com.tjyy.mydb.backend.dm;
 
 import com.google.common.primitives.Bytes;
 import com.tjyy.mydb.backend.common.SubArray;
+import com.tjyy.mydb.backend.dm.dataitem.DataItem;
 import com.tjyy.mydb.backend.dm.logger.Logger;
 import com.tjyy.mydb.backend.dm.page.CommonPage;
 import com.tjyy.mydb.backend.dm.page.Page;
@@ -199,16 +200,16 @@ public class Recover {
      * @param dataItem
      * @return
      */
-    // public static byte[] updateLog(long xid, DataItem dataItem){
-    //     byte[] logType = {LOG_TYPE_UPDATE};
-    //     byte[] xidRaw = Parser.long2Byte(xid);
-    //     byte[] uidRaw = Parser.long2Byte(dataItem.getUid());
-    //     byte[] oldRaw = dataItem.getOldRaw();
-    //
-    //     SubArray raw = dataItem.getRaw();
-    //     byte[] newRaw = Arrays.copyOfRange(raw.raw, raw.start, raw.end);
-    //     return Bytes.concat(logType, xidRaw, uidRaw, oldRaw, newRaw);
-    // }
+    public static byte[] updateLog(long xid, DataItem dataItem){
+        byte[] logType = {LOG_TYPE_UPDATE};
+        byte[] xidRaw = Parser.long2Byte(xid);
+        byte[] uidRaw = Parser.long2Byte(dataItem.getUid());
+        byte[] oldRaw = dataItem.getOldRaw();
+
+        SubArray raw = dataItem.getRaw();
+        byte[] newRaw = Arrays.copyOfRange(raw.raw, raw.start, raw.end);
+        return Bytes.concat(logType, xidRaw, uidRaw, oldRaw, newRaw);
+    }
 
     /**
      * 根据传入的 log 记录解析出各个元素
@@ -321,9 +322,9 @@ public class Recover {
             Panic.panic(e);
         }
         try {
-            // if (flag == UNDO){
-            //     DataItem.setDataItemRawInvalid(insertLogInfo.raw);
-            // }
+            if (flag == UNDO){
+                DataItem.setDataItemRawInvalid(insertLogInfo.raw);
+            }
             CommonPage.recoverInsert(page, insertLogInfo.raw, insertLogInfo.offset);
         }finally {
             page.release();
